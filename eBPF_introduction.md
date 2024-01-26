@@ -14,7 +14,7 @@ The Linux kernel is a layer between the software and the hardware. The developer
 ## Why eBPF? 
 (1) A kernel developer can for sure make changes in the kernel code to add new functionality or to change the existing functionality. But the issue is not just about coding the changes, it should be accepted by the Linux community as it is a general-purpose operating system used by trillions of people for various purposes.
 
-(2) Linux kernel also supports features of kernel modules where a developer can write kernel modules to add new features or change the existing ones. The advantage is it should not be incorporated into the mainstream Linux kernel. But still, the drawback the developer needs to do full-on kernel-level programming. If these modules lead to kernel crashing, it is a hectic job to fix everything. The concern about running a kernel module is to ensure that it is safe to run. The kernel is responsible for the safety. For example, is the kernel module safe from various security attacks? Can we trust the author of the module to not add malicious code to the kernel through these modules?
+(2) Linux kernel also supports features of kernel modules where a developer can write kernel modules to add new features or change the existing ones. The advantage is it should not be incorporated into the mainstream Linux kernel. But still, the drawback the developer needs to do full-on kernel-level programming. If these modules lead to kernel crashing, it is a hectic job to fix everything. The concern about running a kernel module is ensuring it is safe to run. The kernel is responsible for the safety. For example, is the kernel module safe from various security attacks? Can we trust the author of the module to not add malicious code to the kernel through these modules?
 
 ### Advantages of eBPF:
 * eBPF provides an additional benefit called "eBPF verifier" along with means to add features to kernel level from user-space. The job of 
@@ -24,7 +24,8 @@ The Linux kernel is a layer between the software and the hardware. The developer
   irrespective of what caused that event. For example, if we attach a program to a syscall for opening files, it will be triggered whenever
   a process is trying to open a file. It does not matter whether the process was already running when the program was loaded. It is a huge
   advantage in terms of performance as the kernel does not have to reboot for the machine to use every new functionality.
-* 
+* eBPF programs are very efficient. The program just needs to be loaded and it is then compiled by JIT directly to the machine code that is 
+  executed on the CPU. There is no extra preformation cost for transitioning between the user space and kernel space to handle each event.
 
 
 
