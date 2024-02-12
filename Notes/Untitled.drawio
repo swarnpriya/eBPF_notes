@@ -1,0 +1,64 @@
+<mxfile host="app.diagrams.net" modified="2024-02-06T17:36:02.202Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36" etag="Zw8TE6UrsdrZW4uQs_Vd" version="23.1.1" type="device">
+  <diagram name="Page-1" id="RK6Y4kTIXz4QSAaelpeY">
+    <mxGraphModel dx="1026" dy="651" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="Pqh1HwjwaqGqAqokoveN-1" value="Compiled C code + Non functional specifications (S)" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="277" y="441" width="296" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="Pqh1HwjwaqGqAqokoveN-2" value="&lt;b&gt;Language L (superset of Koka)&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="330" y="144" width="194" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="Pqh1HwjwaqGqAqokoveN-3" value="Type System (basic like type checking the data types and their subtyping relation etc..)" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="607" y="92" width="191" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="Pqh1HwjwaqGqAqokoveN-5" value="High-level language" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="361" y="185" width="124" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="Pqh1HwjwaqGqAqokoveN-6" value="Type System related to safety like bounded memory access, undefined behavior etc..." style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="586" y="206" width="206" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="Pqh1HwjwaqGqAqokoveN-7" value="Support at source level" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="618.5" y="44" width="141" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="Pqh1HwjwaqGqAqokoveN-8" value="+" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="569" y="109" width="25" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="Pqh1HwjwaqGqAqokoveN-9" value="+" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="557" y="213" width="25" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="Pqh1HwjwaqGqAqokoveN-10" value="&lt;b&gt;&lt;font style=&quot;font-size: 21px;&quot;&gt;Source Level&lt;/font&gt;&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="57" y="157.5" width="149" height="37" as="geometry" />
+        </mxCell>
+        <mxCell id="Pqh1HwjwaqGqAqokoveN-11" value="" style="shape=flexArrow;endArrow=classic;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="424" y="236" as="sourcePoint" />
+            <mxPoint x="424" y="437" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Pqh1HwjwaqGqAqokoveN-12" value="(can be used to write eBPF program)" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="312" y="126" width="246" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="Pqh1HwjwaqGqAqokoveN-13" value="Koka compiler&amp;nbsp;" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="452" y="306" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="Pqh1HwjwaqGqAqokoveN-14" value="&lt;b&gt;L language&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="385" y="142" width="81" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="Pqh1HwjwaqGqAqokoveN-15" value="&lt;b&gt;Source-level Program P&amp;nbsp;&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="348.5" y="206" width="157" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="Pqh1HwjwaqGqAqokoveN-16" value="&lt;b&gt;Target-level Program T&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="351.5" y="518" width="148" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="Pqh1HwjwaqGqAqokoveN-17" value="&lt;b&gt;T satisfies S?&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="601" y="492" width="95" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="Pqh1HwjwaqGqAqokoveN-18" value="&lt;b&gt;&lt;font style=&quot;font-size: 21px;&quot;&gt;Target Level&lt;/font&gt;&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="72" y="481" width="140" height="37" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
