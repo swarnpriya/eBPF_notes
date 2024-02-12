@@ -6,7 +6,7 @@ int counter = 0;
 SEC("xdp")
 int packet_count(void *ctx) {
     bpf_printk("%d", counter);
-    counter++
+    counter++;
     return XDP_PASS;
 }
 
