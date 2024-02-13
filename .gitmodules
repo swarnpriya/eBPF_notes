@@ -1,3 +1,0 @@
-[submodule "eBPF_Koka/libbpf-bootstrap"]
-	path = eBPF_Koka/libbpf-bootstrap
-	url = https://github.com/libbpf/libbpf-bootstrap.git
