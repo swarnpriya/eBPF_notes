@@ -20,13 +20,17 @@ char LICENSE[] SEC("license") = "Dual BSD/GPL";
 ## How to run and print the output?
 - Go to the directory eBPF_Koka/packet_count and do "make"
     - "make" produces the object file "packet_count.bpf.o"
-- Inspecting the object file: 
-<span style="color:green">$ file packet_count.bpf.o</span>
+- Inspecting the object file:
+
+  **<span style="color:green">$ file packet_count.bpf.o</span>**
+  
   Output: 
   ```packet_count.bpf.o: ELF 64-bit LSB relocatable, eBPF, version 1 (SYSV), with     debug_info, not stripped```
 - Inspecting the object file:
-<span style="color:green">$ llvm-objdump -S packet_count.bpf.o</span>
-Output:
+  
+  **<span style="color:green">$ llvm-objdump -S packet_count.bpf.o</span>**
+
+  Output:
     ```
     packet_count.bpf.o: file format elf64-bpf
 
@@ -48,15 +52,23 @@ Output:
       11: 95 00 00 00 00 00 00 00 exit      
     ```
 - Loading the program into the kernel:
-  <span style="color:green"> bpftool prog load packet_count.bpf.o /sys/fs/bpf/packet_count </span>
-  Output: 
-  No output response to this command indicates success. To confirm, do 
-  <span style="color:green">$ ls /sys/fs/bpf</span>
+  
+  **<span style="color:green"> bpftool prog load packet_count.bpf.o /sys/fs/bpf/packet_count </span>**
+  
+  Output:
+  
+  No output response to this command indicates success.
+
+  To confirm, do 
+  **<span style="color:green">$ ls /sys/fs/bpf</span>**
+  
   Output: 
   ```packet_count```
 
 - Inspecting the loaded program:
-<span style="color:green">$ bpftool prog list</span>
+  
+  **<span style="color:green">$ bpftool prog list</span>**
+  
   Output:
     ```
     ...
@@ -70,8 +82,10 @@ Output:
     ```
 
 - The translated Bytecode:
-<span style="color:green">$ bpftool prog dump xlated name packet_count</span>
-Output:
+
+  **<span style="color:green">$ bpftool prog dump xlated name packet_count</span>**
+
+  Output:
     ```
      238: xdp  name packet_count  tag 644ee9a75611c6d0  gpl
      int packet_count(void * ctx):
@@ -90,8 +104,10 @@ Output:
       11: (95) exit
     ```
 - The JIT-Compiled Machine Code
-<span style="color:green">$ bpftool prog dump jited name packet_count</span>
-Output:
+
+  **<span style="color:green">$ bpftool prog dump jited name packet_count</span>**
+
+  Output:
     ```
     int packet_count(void * ctx):
     bpf_prog_644ee9a75611c6d0_packet_count:
@@ -119,10 +135,10 @@ Output:
     ```
 
 - Attaching to an Event:
-  - <span style="color:green">$ route</span> : Generates the network interface name
-  - <span style="color:green">$ bpftool net attach xdp id 238 dev wlp2s0</span>
+  - **<span style="color:green">$ route</span>** : Generates the network interface name
+  - **<span style="color:green">$ bpftool net attach xdp id 238 dev wlp2s0</span>**
   - At this point, the packet_count eBPF program should be producing the count everytime a network packet is received.
-  - <span style="color:green">$ cat /sys/kernel/debug/tracing/tacepipe</span> 
+  - **<span style="color:green">$ cat /sys/kernel/debug/tracing/tacepipe</span>** 
     ```
         irq/158-iwlwifi-486     [007] ..s21 21068.249939: bpf_trace_printk: 189
         irq/158-iwlwifi-486     [007] ..s21 21069.467443: bpf_trace_printk: 190
