@@ -62,7 +62,7 @@
 ## Plan: 
 - Need to understand Koka on how to add new functions and datatypes. Somewhat I am becoming more comfortable in this part and can figure it out.
 - Need to understand the Koka compiler to extend it. (Hard part)
-  It is not very straightforward to understand because it is not a compiler from high-level to assembly (like traditional CompCert or Jasmin (I previously worked on)).
+  It is not very straightforward to understand because it is not a compiler from high-level to assembly (like a traditional compiler design).
   It is very much like a translator and involves a lot of concepts like boxing/unboxing, borrowing while translating the types, and so on.
 - Understand more eBPF parts as I move forward.
 
@@ -71,6 +71,7 @@
   I understand that a strong type system will help in providing stronger guarantees at compile time but in what way this approach will be better than the existing one?
   - Need to learn a bit about features of Rust and what they could provide for eBPF programs at static and runtime to make a clear distinction that
     Koka programs can do better than Rust programs in terms of verification.
+  - I don't have a very clear picture of it as of now. Maybe Tim has a better understanding and it would be nice to note it somewhere as a draft. 
 - If we are successful in adding helper functions, eBPF types, etc in Koka and translating it to C
   then can we still guarantee the properties of the source level at the compilation level? How to answer this question?
   Write paper-based proofs for preservation. Add mechanized proofs to ensure it.
