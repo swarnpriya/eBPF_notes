@@ -80,7 +80,7 @@
   - This we can only figure out more after adding support for at least a few datatypes and features.
  
 ## Koka vs Rust
-- Koka compiler uses "Optimized Reference Counting: Perceus" for memory management and does not utilize garbage collection.
+- Koka compiler uses "Optimized Reference Counting: Perceus" for memory management and does not utilize garbage collection or manual memory management mechanism.
   Rust uses manual memory management.
   ![memorymanage](https://github.com/swarnpriya/eBPF_notes/blob/main/koka%3Arust%3Ac%3Ac.png)
  
