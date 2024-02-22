@@ -74,7 +74,8 @@
   - I don't have a very clear picture of it as of now. Maybe Tim has a better understanding and it would be nice to note it somewhere as a draft. 
 - If we are successful in adding helper functions, eBPF types, etc in Koka and translating it to C
   then can we still guarantee the properties of the source level at the compilation level? How to answer this question?
-  Write paper-based proofs for preservation. Add mechanized proofs to ensure it.
+  - Write paper-based proofs for preservation.
+  - Add mechanized proofs to ensure it.
 - How much effort and time it will take for me to make all these changes in Koka and its compiler?
   - This we can only figure out more after adding support for at least a few datatypes and features.
  
