@@ -4,7 +4,7 @@
   - Maps
     - Plan A
       - Vector datatype exists in Koka
-      - One way is I can build a Map datatype using a vector datatype, but it will require building a collision resistance hash function.
+      - One way is we can build a Map datatype using a vector datatype, but it will require building a collision resistance hash function.
       - This requires no compiler change but not so desirable way in terms of how other datatypes are defined in Koka.
     - Plan B
       - Add map datatype and extend the koka compiler
