@@ -79,6 +79,10 @@
 - How much effort and time it will take for me to make all these changes in Koka and its compiler?
   - This we can only figure out more after adding support for at least a few datatypes and features.
  
+## Koka/Rust
+- Koka compiler uses "Optimized Reference Counting: Perceus" for memory management and does not utilize garbage collection.
+  Rust uses manual memory management.
+ 
 
 
 
