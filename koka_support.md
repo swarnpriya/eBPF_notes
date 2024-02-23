@@ -83,6 +83,12 @@
 - Koka compiler uses "Optimized Reference Counting: Perceus" for memory management and does not utilize garbage collection or manual memory management mechanism.
   Rust uses manual memory management.
   ![memorymanage](https://github.com/swarnpriya/eBPF_notes/blob/main/koka%3Arust%3Ac%3Ac.png)
+- Koka provides strong compile-time guarantees in order to enable efficient reference-counting at run-time.
+  - Reference counting tracks the references to an object.
+  - Makes the memory management much more automatic.
+  - Reference counting algorithm in Koka supports:
+    - Precise: An object is freed as soon as no more references remain.
+    - It is more efficient than Rust's manual memory management or Drop trait.
  
 
 
