@@ -88,8 +88,30 @@
   - Makes the memory management much more automatic.
   - Reference counting algorithm in Koka supports:
     - Precise: An object is freed as soon as no more references remain.
-    - It is more efficient than Rust's manual memory management or Drop trait.
- 
+      - Ownership of references is passed down into each function
+      - Memory usage is halfed:
+
+        For example, in a code like
+        ```
+        fun foo() {
+          val xs = list(1, 1000)
+          val ys = map(xs, inc)
+          print(ys)
+          drop(xs)
+          drop(ys)
+        }
+        ```
+        This code retains the xs till later stage, until ```print``` happens (maintaing two spot in memory for xs and ys).
+        But in Koka, the reference of ```xs``` is passed onto map and reference of ```ys``` is passed to ```print```.
+        ```
+        fun foo() {
+          val xs = list(1, 1000)
+          val ys = map(xs, inc)
+          print(ys)
+        }
+        ```
+        There is no ```drop``` needed in foo function as freeing all the local variables will be taken care by the function map and print.
+        map and print function drop the list elements as they go. The list ```xs``` is deallocated while the new list ```ys``` is being allocated. 
 
 
 
