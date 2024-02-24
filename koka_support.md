@@ -7,7 +7,9 @@
       - One way is we can build a Map datatype using a vector datatype, but it will require building a collision resistance hash function.
       - This requires no compiler change but not so desirable way in terms of how other datatypes are defined in Koka.
     - Plan B
-      - Add map datatype and extend the koka compiler
+      - Add map datatype and extend the koka compiler in the same way as vector is done
+    - Plan C
+      - Implement map data type in Koka from scratch (my fav approach) and then koka compiler will take care of its translation.
   - Arrays
 - eBPF specific data types:
   - XDP_type:
