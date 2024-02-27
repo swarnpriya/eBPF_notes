@@ -138,7 +138,7 @@ char LICENSE[] SEC("license") = "Dual BSD/GPL";
   - **<span style="color:green">$ route</span>** : Generates the network interface name
   - **<span style="color:green">$ bpftool net attach xdp id 238 dev wlp2s0</span>**
   - At this point, the packet_count eBPF program should be producing the count everytime a network packet is received.
-  - **<span style="color:green">$ cat /sys/kernel/debug/tracing/tacepipe</span>** 
+  - **<span style="color:green">$ cat /sys/kernel/debug/tracing/tracepipe</span>** 
     ```
         irq/158-iwlwifi-486     [007] ..s21 21068.249939: bpf_trace_printk: 189
         irq/158-iwlwifi-486     [007] ..s21 21069.467443: bpf_trace_printk: 190
