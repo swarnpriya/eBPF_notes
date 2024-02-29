@@ -18,6 +18,6 @@
 - The verifier analyzes the semantics of some instructions in a wrong way.      
   - An example is pointed out in the paper "A proof-carrying approach to building correct and flexible BPF verifiers" about the left and right shift operator involving truncation. It was correctness bug. The actual operation was truncation followed by shift and the verifier was analyzing the shift followed by truncation.
   ![bpf_syscalls](images/verifier_bug1.png)
-- Another example pointer out in the paper "A proof-carrying approach to building correct and flexible BPF verifiers" related to flexibility issue.
-  - The verifier use to verify the upper and lower bound of each register but was not capturing the relation between the registers.
-  ![bpf_syscalls](images/verifier_bug2.png)
+  - Another example pointer out in the paper "A proof-carrying approach to building correct and flexible BPF verifiers" related to flexibility issue.
+    - The verifier use to verify the upper and lower bound of each register but was not capturing the relation between the registers.
+    ![bpf_syscalls](images/verifier_bug2.png)
