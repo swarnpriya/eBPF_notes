@@ -39,8 +39,8 @@ The code consists of two parts:
 - ```attach_kprobe``` is used to attach the eBPF program "hello" to the event "execve".
 
 
-![user-kernel](https://github.com/swarnpriya/eBPF_notes/blob/main/images/helloProg.png)
+![user-kernel](images/helloProg.png)
 
 - Pictorial representation:
 
-![user-kernel](https://github.com/swarnpriya/eBPF_notes/blob/main/images/helloWorldOperation.png)
+![user-kernel](images/helloWorldOperation.png)
