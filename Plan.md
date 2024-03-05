@@ -72,7 +72,10 @@
         | _   := ff
 
          ```
-- JMP64_X, Call, Exit : No meaningful check
+- JMP64_X : No meaningful check
+- No helped function check
+- Basically it boils down to formally verfying the current BPF verifier using formal method techniques.
+     - This helped them to find some error in the verifier like semantical error in the operators and not capturing relations between regsiters.
 
 ## Approach 2:
 ### Bisimulation mechanism: 
