@@ -48,6 +48,32 @@
 ### Note
 - Prior work "Exoverifer" and "Jitterbug" already implements this approach in Lean
 
+#### Properties verified by Exoverifier:
+- ALU64_X op dest src :
+    - op((scalar_value x), (scalar_value y))
+        -
+          ```
+          def doALU64_scalar_check : ALU → i64 → i64 → bool
+          | DIV x y  := y ≠ 0 -- Disallow division by zero.
+          | MOD x y  := y ≠ 0 -- Disallow mod by zero.
+          | LSH x y  := y < 64 -- Prohibit oversized shift.
+          | RSH x y  := y < 64 -- Prohibit oversized shift.
+          | ARSH x y := y < 64 -- Prohibit oversized shift.
+          | END x y  := ff -- Disallow endianness conversion for now TODO
+          | _ x y    := tt
+          ```
+     - op((pointer p), (scalar_value y))
+       -
+         ```
+         def doALU_pointer_scalar_check : ALU → bool
+        | ADD := tt
+        | SUB := tt
+        | MOV := tt
+        | _   := ff
+
+         ```
+- ALU64_K op dest imm : 
+
 ## Approach 2:
 ### Bisimulation mechanism: 
 
