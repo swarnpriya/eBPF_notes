@@ -72,7 +72,7 @@
         | _   := ff
 
          ```
-- ALU64_K op dest imm : 
+- JMP64_X, Call, Exit : No meaningful check
 
 ## Approach 2:
 ### Bisimulation mechanism: 
@@ -126,3 +126,4 @@
 - [BPF and XDP Reference Guide BPF Architecture: Cilium](https://docs.cilium.io/en/stable/bpf/architecture/#instruction-set)
 - [BPF standard documentation](https://github.com/ietf-wg-bpf/ebpf-docs)
 - [Jitterbug](https://github.com/uw-unsat/jitterbug)
+- [BPF grammar linux](https://www.kernel.org/doc/html/next/bpf/instruction-set.html)
