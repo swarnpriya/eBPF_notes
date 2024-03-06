@@ -46,7 +46,7 @@
 - Then we validate the proof.
 
 ### Note
-- Prior work "Exoverifer" and "Jitterbug" already implements this approach in Lean
+- Prior work "Exoverifer", "Serval" and "Jitterbug" implements this approach in Lean
 
 #### Properties verified by Exoverifier:
 - ALU64_X op dest src :
@@ -72,8 +72,11 @@
         | _   := ff
 
          ```
-- JMP64_X : No meaningful check
-- No helped function check
+#### Properties not verified by Exoverifier:
+- No checks on loads and stores (grammar for Exoverifier seems to be incomplete)
+- No helper function check: It is dangerous as even the verified code using the BPF verifier will interact with unverified helper function at the 
+  kernel level to read/write to various kernel level data structure.
+- No guarantees on mitigation against side-channel attacks
 - Basically it boils down to formally verfying the current BPF verifier using formal method techniques.
      - This helped them to find some error in the verifier like semantical error in the operators and not capturing relations between regsiters.
 
@@ -130,3 +133,4 @@
 - [BPF standard documentation](https://github.com/ietf-wg-bpf/ebpf-docs)
 - [Jitterbug](https://github.com/uw-unsat/jitterbug)
 - [BPF grammar linux](https://www.kernel.org/doc/html/next/bpf/instruction-set.html)
+- [Memory management in Rust](https://medium.com/geekculture/understanding-memory-management-in-rust-a341cfce9807)
