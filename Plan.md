@@ -122,6 +122,7 @@
 ### Advantages of approach 2 as compared to approach 1
 - This guarantees stronger tool support at the source level, which might help the programmer to write and debug eBPF programs more neatly as compared to debugging at bytecode level.
 - Stronger guarantees than existing approach at compile time.
+- Support for verifying the helper functions
 - Formally verified type system and safety checker for its correctness and soundness
 - End-to-end guarantees from source to bytecode level.
 
