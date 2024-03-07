@@ -137,3 +137,31 @@
 - [Memory management in Rust](https://medium.com/geekculture/understanding-memory-management-in-rust-a341cfce9807)
 
 
+## Would Koka to C with hints approach differ from Exoverifier and Jitterbug, and if so, how?
+Answer is yes in the following ways:
+- This approach provides a stronger tool support for verification (more support at compile time) at high-level language (Koka) as compared to 
+  Expverifier/Jitterbug which works on BPF bytecode level. It is hard for programmer to debugg the code at lower-level as compared to at higher- 
+  level. 
+- Exoverifier/Jitterbug boils down to formally verifying the current verifier and removing the bugs, ensuring completeness/soundness for the verifier 
+  through utilizing the formal specifications and proofs written in Lean. It mainly aims in making the current verifier bug free and complete but 
+  does not enhance the capabilities of the verifier. For example, ensuring verfication for "helper functions". The current eBPF verifier does not 
+  verifies the helper function. If there are BPF calls (helper functions) used in the user-space code, the verifier totally bypass it if rest of 
+  the program is safe. Using the strong type-system in Koka, we can also aim to ensure typing and safety properties for these helper functions.
+- The hints generated at C-level can make the verification at the C-level doable (not sure at this point how this works, need to read more in this 
+  direction). Frama-C seems quite interesting to me. I will read more about it. But also, why don't we aim to prove that the properties at source- 
+  level is satisfied at byte-code level instead at C-level?
+
+## Koka approach vs Rust approach?
+- Koka can reason about termination as the type declarations in Koka is limited to finite inductive types. Rust does not provide termination.
+- Rust provides memory aquire and release features like ```acquire``` and ```drop```. The ownership works using these rules in Rust:
+  - Each value in Rust has an owner.
+  - There can be only one owner at a time.
+  - When the owner goes out of scope, the value will be dropped using the ```drop``` function which is implicit in case of primitive data-types.
+    But in case of custom data types, the ```drop``` functions needs to manually defined and is automatically called by compiler when the object goes 
+    out of scope.
+  However, for eBPF programs calling the user-defined destructors is not safe at Kernel-level.
+  Because if it is not correctly/safely implemented then it might crash the kernel or do unwanted stuff at the kernel-level memory.
+  Goal will be to do memory management in a safer way using Koka.
+- Stack protection at compile time will be achieved in Koka in the similar manner as done in Rust.
+- Side-channel protection not supported in Rust for eBPF, maybe we can support this using Koka approach. 
+
