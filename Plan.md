@@ -140,8 +140,7 @@
 ## Would Koka to C with hints approach differ from Exoverifier and Jitterbug, and if so, how?
 Answer is yes in the following ways:
 - This approach provides a stronger tool support for verification (more support at compile time) at high-level language (Koka) as compared to 
-  Expverifier/Jitterbug which works on BPF bytecode level. It is hard for programmer to debugg the code at lower-level as compared to at higher- 
-  level. 
+  Expverifier/Jitterbug which works on BPF bytecode level. It is hard for programmer to debug the code at lower-level as compared to at higher-level. 
 - Exoverifier/Jitterbug boils down to formally verifying the current verifier and removing the bugs, ensuring completeness/soundness for the verifier 
   through utilizing the formal specifications and proofs written in Lean. It mainly aims in making the current verifier bug free and complete but 
   does not enhance the capabilities of the verifier. For example, ensuring verfication for "helper functions". The current eBPF verifier does not 
@@ -152,7 +151,8 @@ Answer is yes in the following ways:
   level is satisfied at byte-code level instead at C-level?
 
 ## Koka approach vs Rust approach?
-- Koka can reason about termination as the type declarations in Koka is limited to finite inductive types. Rust does not provide termination.
+- Koka can reason about termination because of its strong type system and the type declarations in Koka is limited to finite inductive types. Rust 
+  does not provide termination guarantees.
 - Rust provides memory aquire and release features like ```acquire``` and ```drop```. The ownership works using these rules in Rust:
   - Each value in Rust has an owner.
   - There can be only one owner at a time.
