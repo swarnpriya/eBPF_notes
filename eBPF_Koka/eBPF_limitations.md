@@ -21,3 +21,12 @@
     + ...
 -  Available helper functions may differ for each program type.
     + BPF programs attacked to sockets can only call into a subset of helpers compared to BPF programs attached to the tc layer.
+- eBPF programs allows only register ```r0``` to be used as return value, hence it does not support multiple return value.
+- eBPF programs cannot access instruction pointer or return address.
+- eBPF programs cannot access stack pointer (only frame pointer is accessible). The BPF compiler make use of ```r11``` to store stack pointer but the program cannot access it.
+- The return type of a program needs to be an int???????
+
+## References
+- [Q&A kernel](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/Documentation/bpf/bpf_design_QA.rst)
+- [Cilium doc](https://docs.cilium.io/en/latest/bpf/architecture/)
+- [sysdig](https://sysdig.com/blog/the-art-of-writing-ebpf-programs-a-primer/)
