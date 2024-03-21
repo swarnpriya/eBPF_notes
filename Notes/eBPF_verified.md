@@ -45,3 +45,5 @@
     - The verifier has a limit on the total number of instructions that it will process. As of now, the limit is set to 1 million instructions and it is hard coded into the kernel.
     - If the verifier hasn't reched the end of the BPF program before it has processed this many instructions, it rejects the program. 
 
+### References
+- [Blogpost1](https://ddosify.com/blog/unveiling-ebpf-verifier-errors/)
