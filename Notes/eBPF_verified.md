@@ -9,10 +9,13 @@
     - Memory safety:
         - Checks out-of-bound memory accesses.
         - Safeguards use-after-free bugs.
+        - Unreleased references check
+        - Dereferencing a null pointer (a null check needs to be added before the derefencing/referencing a pointer) 
     - Ensuring type safety  
         - Utilizes BPF type format. 
     - Preventing hardware exceptions
         - Example, division by zero
+    - Uninitialized register ```r0```
 
 # eBPF Verifier
 - After the eBPF program is loaded into the kernel, the verification process ensures that the program is safe.
