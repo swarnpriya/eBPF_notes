@@ -85,10 +85,9 @@
           bpf_printk("%x %x", data, data_end);
           return XDP_PASS;
         }
-  
         char LICENSE[] SEC("license") = "Dual BSD/GPL";
         ```
-
+        (**Solution: If array bound is statically known then we can use "Static analysis for array bounds checking" NEED TO INVESTIGATE MORE ON HOW TO DO IT**)
         ```
         char message[12] = "Hello World";
         // Changing this to <= means and c could have value beyond the bounds of the
@@ -99,6 +98,7 @@
         }
         ```
   - [ ] Checking Pointers Before Dereferencing
+        (**Solution: Add the check always in the program (p!=0) if p is dereferenced where p is a pointer and we can use program analysis to check if programmer has inserted such checks or not**)
       - All pointers used in the program needs to be checked before they are dereferenced so that there is no program crash due to null pointer dereferencing.
         ```
         // Suppose there is no entry in this map corresponding to uid,
