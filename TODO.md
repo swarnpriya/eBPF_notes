@@ -126,4 +126,7 @@
     - eBPF programs consist of a set of bytecode instructions.
     - Check should ensure that instructions used in a program are valid bytecode instructions.
     - **We can ignore this check as it would be related to bug in the compiler if it produces invalid bytecode**
+  - [ ] No use of malloc in generated C code from Koka compiler
+    - No call to malloc/dynamic memory allocation in eBPF programs
+      Programs that use maps, arrays etc. uses helper functions to perform the allocation in memory. 
           
