@@ -1,10 +1,6 @@
 # Known Verifier Bugs:
 
 - [Finding Correctness Bugs in eBPF verifier with Structured and Sanitized Program](http://www.wingtecher.com/themes/WingTecherResearch/assets/papers/ebpf_eurosys24.pdf)
-  
-  [Linux Kernel: eBPF verifier bug](https://github.com/google/security-research/security/advisories/GHSA-j87x-j6mh-mv8v)
-
-  [bpf: Fix incorrect verifier pruning due to missing register precision taints](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=71b547f561247897a0a14f3082730156c0533fed)
   - Example 1: 
  
     ```
@@ -22,3 +18,6 @@
     9: r8 += r1
     10: r0 = *(u64 *)(r8 + 0) ; Out-of-bounds access here
     ```
+- [Linux Kernel: eBPF verifier bug](https://github.com/google/security-research/security/advisories/GHSA-j87x-j6mh-mv8v)
+
+- [bpf: Fix incorrect verifier pruning due to missing register precision taints](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=71b547f561247897a0a14f3082730156c0533fed)
