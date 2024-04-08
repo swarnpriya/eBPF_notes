@@ -26,7 +26,9 @@
 - eBPF programs cannot access stack pointer (only frame pointer is accessible). The BPF compiler make use of ```r11``` to store stack pointer but the program cannot access it.
 - **The return type of a program needs to be an int.**
     + eBPF programs return value in register ```r0``` no matter what the function return type is, hence it tries to read register ```r0``` for 
-      returning before exit instruction. If it is uninitialized, the verifier throws an error. 
+      returning before exit instruction. If it is uninitialized, the verifier throws an error.
+- **No call to malloc/dynamic memory allocation in eBPF programs**
+    + Programs that use maps, arrays etc. uses helper functions to perform the allocation in memory. 
 
 ## References
 - [Q&A kernel](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/Documentation/bpf/bpf_design_QA.rst)
