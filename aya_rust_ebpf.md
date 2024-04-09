@@ -266,5 +266,20 @@
     
 
 # Points to note:
-- It provides more guarantees about type safety as compared to Clang compiler as it checks more properties (some of them are currently checked by the current eBPF verifier).
-- A lot of the code that they write is categorized as ```unsafe```, as it requires reading directly from kernel memory.
+- List of existing tools for eBPF development:
+    + **libbpf**: Both eBPF program and user-space for loading/unloading/hooking are written in ```C```
+    + **bcc**: eBPF program is written in ```C``` and the loader/hooker/unloader is written in  ```Python```
+    + **libbpf-rs**: eBPF program is written in ```C``` and the loader/hooker/unloader is written in ```Rust```
+    + **libbpf-go**: eBPF program is written in ```C``` and the loader/hooker/unloader is written in ```Go```
+    + **Aya**: Both eBPF program and user-space for loading/unloading/hooking are written in ```Rust```
+- Aya compilation chain: Rust -> LLVM-IR -> BPF Bytecode
+- **Benefits/Limitations of writing eBPF features completely in Rust**
+  * Memory Safety? ***Still relies on the eBPF verifier***
+    + Rust memory model does not matter much for eBPF part because most of the time eBPF programs deal with kernel memory and userspace pointers which are treated as unsafe.
+    + Memory safety of Aya relies on eBPF verifier.
+    + A lot of the code that they write is categorized as ```unsafe```, as it requires reading directly from kernel memory.
+  * Type Safety? ***Good(Better than C compiler)***
+    + Aya provides more guarantees about type safety as compared to Clang compiler as it checks more properties (some of them are currently checked by the current eBPF verifier).
+    + C is not as strongly typed as Rust.
+  * Error handling in C is not very expressive. It usually assumes 0 means success. Whereas in Rust there is a result type (Ok or Error).
+  * Aya uses some tricks to avoid using helper functions. For example, using Aya-log, they send debugging message to user-space through perf-buffer and hence no need to use bpf_printk.
