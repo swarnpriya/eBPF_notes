@@ -71,7 +71,7 @@
       ```
   
   ## Example 2: The example pass all IPv4 packets
-  In C:
+  In C: Only passes the IPV4 packets and drops rest 
   ```
   #include <linux/bpf.h>
   #include <bpf/bpf_helpers.h>
@@ -100,9 +100,12 @@
   
   char _license[] SEC("license") = "GPL";
   ```
-  In Rust: log the source IP address of incoming packets. So we'll need to:
-           (1) Read the Ethernet header to determine if we're dealing with an IPv4 packet, else terminate parsing.
-           (2) Read the source IP Address from the IPv4 header.
+  In Rust: 
+  Log the source IP address of incoming packets. So we'll need to:
+  
+  (1) Read the Ethernet header to determine if we're dealing with an IPv4 packet, else terminate parsing.
+  
+  (2) Read the source IP Address from the IPv4 header.
   ```
   #![no_std]
   #![no_main]
@@ -175,8 +178,93 @@
   }
 
   ```
+## Example 3: 
+   Program drops a list of IP addresses. 
+   To lookup for IP addresses more efficiently, the Rust program uses HashMap. 
+   
+   (1) Program creates a HashMap that stores the IP addresses that will act as a blocklist.
+   
+   (2) Check the IP address from the packer against the HashMap to make a decision of passing or dropping
+   
+   (3) Add entries to blocklist from userspace.
+   ```
+    #![no_std]
+    #![no_main]
+    #![allow(nonstandard_style, dead_code)]
+    
+    use aya_ebpf::{
+        bindings::xdp_action,
+        macros::{map, xdp},
+        maps::HashMap,
+        programs::XdpContext,
+    };
+    use aya_log_ebpf::info;
+    
+    use core::mem;
+    use network_types::{
+        eth::{EthHdr, EtherType},
+        ip::Ipv4Hdr,
+    };
+    
+    #[panic_handler]
+    fn panic(_info: &core::panic::PanicInfo) -> ! {
+        unsafe { core::hint::unreachable_unchecked() }
+    }
+    
+    #[map] // 
+    static BLOCKLIST: HashMap<u32, u32> =
+        HashMap::<u32, u32>::with_max_entries(1024, 0);
+    
+    #[xdp]
+    pub fn xdp_firewall(ctx: XdpContext) -> u32 {
+        match try_xdp_firewall(ctx) {
+            Ok(ret) => ret,
+            Err(_) => xdp_action::XDP_ABORTED,
+        }
+    }
+    
+    #[inline(always)]
+    unsafe fn ptr_at<T>(ctx: &XdpContext, offset: usize) -> Result<*const T, ()> {
+        let start = ctx.data();
+        let end = ctx.data_end();
+        let len = mem::size_of::<T>();
+    
+        if start + offset + len > end {
+            return Err(());
+        }
+    
+        let ptr = (start + offset) as *const T;
+        Ok(&*ptr)
+    }
+    
+    // 
+    fn block_ip(address: u32) -> bool {
+        unsafe { BLOCKLIST.get(&address).is_some() }
+    }
+    
+    fn try_xdp_firewall(ctx: XdpContext) -> Result<u32, ()> {
+        let ethhdr: *const EthHdr = unsafe { ptr_at(&ctx, 0)? };
+        match unsafe { (*ethhdr).ether_type } {
+            EtherType::Ipv4 => {}
+            _ => return Ok(xdp_action::XDP_PASS),
+        }
+    
+        let ipv4hdr: *const Ipv4Hdr = unsafe { ptr_at(&ctx, EthHdr::LEN)? };
+        let source = u32::from_be(unsafe { (*ipv4hdr).src_addr });
+    
+        // 
+        let action = if block_ip(source) {
+            xdp_action::XDP_DROP
+        } else {
+            xdp_action::XDP_PASS
+        };
+        info!(&ctx, "SRC: {:i}, ACTION: {}", source, action);
+    
+        Ok(action)
+    }
+  ```
     
 
 # Points to note:
-- It provides more guarantees about type safety as compared to Clang compiler as it checks more properties that the current eBPF verifier checks.
+- It provides more guarantees about type safety as compared to Clang compiler as it checks more properties (some of them are currently checked by the current eBPF verifier).
 - A lot of the code that they write is categorized as ```unsafe```, as it requires reading directly from kernel memory.
