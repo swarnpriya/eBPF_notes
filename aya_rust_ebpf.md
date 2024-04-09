@@ -71,7 +71,7 @@
       ```
   
   ## Example 2: The example pass all IPv4 packets
-  In C: Only passes the IPV4 packets and drops rest 
+  In C: Only passes the IPV4 packets and drops rest (Similar kind of program as in Rust but not exactly same)
   ```
   #include <linux/bpf.h>
   #include <bpf/bpf_helpers.h>
@@ -283,3 +283,13 @@
     + C is not as strongly typed as Rust.
   * Error handling in C is not very expressive. It usually assumes 0 means success. Whereas in Rust there is a result type (Ok or Error).
   * Aya uses some tricks to avoid using helper functions. For example, using Aya-log, they send debugging message to user-space through perf-buffer and hence no need to use bpf_printk.
+  * Aya reimplement helper functions, such as uses Rust HashMap instead of calling BPF_map syscalls.
+ 
+# Comparison with Koka work:
+- Our goal is to get rid of the eBPF verifier completely so that we rely on koka++ type system and various program analysis that we perform. But in case of Aya, they still relies on verifier for memory 
+  management.
+- With respect to helper functions, Aya does a better job by reimplementing most of the functionalities of the helper function. We need to look more into it on how to guarantee more properties about helper 
+  function in Koka.
+- Error handling, we can also perform in similar manner in Koka as done in Rust-Aya.
+- ... (More to be decided)
+- Our overall goal is different than Aya project: We aim not only providing easy development of eBPF projects using Koka but also aim on completely not relying on eBPF verifier. 
