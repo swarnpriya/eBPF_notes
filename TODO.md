@@ -110,7 +110,7 @@
         ```
   - [ ] Accessing context
       - Depending on the program and attachment type, it may be allowed to access only some of that context information.
-  - [ ] Loops should terminate
+  - [ ] Loops should terminate (**Solution: We should use the "div" effect types. If a function effect is inferred as "div" then we should reject those functions**)
   - [x] Checking the return code (**Supported**)
       - The return code from an eBPF program is stored in Register R0. R0 should not be uninitialized.
         ```
