@@ -137,7 +137,6 @@
 - [x] Support for "sec" attributes in Koka(**Supported**)
 - [ ] Support for "sec" attributes for Koka structures - It is needed to create kernel specific maps
 - [ ] Support for "licence" attributes in Koka(**Solution: Add it like we added the "sec" attributes in Koka and change the compiler accordingly**)
-- [ ] Remove ```static inline``` as it is not accepted by BPF target. Some very small programs are automatically inlined by Koka compiler 
 
 
           
