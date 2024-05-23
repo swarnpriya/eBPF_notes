@@ -128,5 +128,15 @@
     - **We can ignore this check as it would be related to bug in the compiler if it produces invalid bytecode**
   - [ ] No use of malloc in generated C code from Koka compiler
     - No call to malloc/dynamic memory allocation in eBPF programs
-      Programs that use maps, arrays etc. uses helper functions to perform the allocation in memory. 
+      Programs that use maps, arrays etc. uses helper functions to perform the allocation in memory.
+
+# Koka Compilation TODOs
+- [x] Enum constructor type should be of type int (eBPF program return BPF specific enum types and hence the return type should be ```int```)
+      - In Koka, if the number of entries in enum type is less than 256 (8 bits) then it uses ```char``` type.
+- [ ] The argument type of eBPF programs that manipulate the BPF contexts like xdp_md should be pointer to those structures instead of ```kk_datatype_ptr_t``` (**Solution: Write a Clang frontend transformation that transforms the type from ```kk_datatype_ptr_t``` to ```struct xdp_md*``` - In this way, we don't break the Koka memory management**)
+- [x] Support for "sec" attributes in Koka(**Supported**)
+- [ ] Support for "sec" attributes for Koka structures - It is needed to create kernel specific maps
+- [ ] Support for "licence" attributes in Koka(**Solution: Add it like we added the "sec" attributes in Koka and change the compiler accordingly**)
+
+
           
