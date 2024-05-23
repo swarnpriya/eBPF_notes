@@ -4,12 +4,21 @@
 
 // How many times each different user has run programs.
 
-struct {
-    __uint(type, BPF_MAP_TYPE_HASH);
-    __uint(max_entries, 10240);
-    __type(key, uint64_t);
-    __type(value, uint64_t);
-} counter_table SEC(".maps");
+struct bpf_map_def {
+      unsigned int type;
+      unsigned int key_size;
+      unsigned int value_size;
+      unsigned int max_entries;
+      unsigned int map_flags;
+};
+
+struct bpf_map_def SEC("maps") counter_table = {
+      .type        = BPF_MAP_TYPE_HASH,
+      .key_size    = sizeof(uint64_t),
+      .value_size  = sizeof(uint64_t),
+      .max_entries = 10240,
+      .map_flags   = 0
+}; 
 
 SEC("ksyscall/execve")
 
