@@ -18,6 +18,7 @@ int xdp_drop_prog(struct xdp_md *ctx)
 
     h_proto = eth->h_proto;
     // works for <65535 but not for h_proto as it will be a dynamic value
+    // But verifier was not smart enough to compute from the type of h_proto that the max permutation canbe 65535
     for (int i = 0; i < h_proto; i++) {
         bpf_printk("The value of h_proto is %d", h_proto);
     }
@@ -29,3 +30,12 @@ int xdp_drop_prog(struct xdp_md *ctx)
 }
 
 char _license[] SEC("license") = "GPL";
+
+/* Error message from the verifier after running for 100 hours:
+    “BPF program is too large. Processed 1000001 insn
+    processed 1000001 insns (limit 1000000) max_states_per_insn 4 total_states 76923 peak_states 7 mark_read 2
+    -- END PROG LOAD LOG --
+    libbpf: prog 'xdp_drop_prog': failed to load: -7
+    libbpf: failed to load object 'xdp_drop_prog.bpf.o'
+    Error: failed to load object file”
+*/

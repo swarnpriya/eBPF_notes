@@ -3,7 +3,7 @@
 #include <stdint.h>
 
 // How many times each different user has run programs.
-
+/*
 struct bpf_map_def {
       unsigned int type;
       unsigned int key_size;
@@ -18,7 +18,17 @@ struct bpf_map_def SEC("maps") counter_table = {
       .value_size  = sizeof(uint64_t),
       .max_entries = 10240,
       .map_flags   = 0
-}; 
+}; */
+
+struct {
+	int type;
+	int max_entries;
+	int *key;
+	int *value;
+} counter_table SEC(".maps") = {
+	.type = BPF_MAP_TYPE_HASH,
+	.max_entries = 10240,
+};
 
 SEC("ksyscall/execve")
 
@@ -39,3 +49,15 @@ int hello(void *ctx) {
     bpf_map_update_elem(&counter_table, &uid, &counter, 0);
     return 0;
 }
+
+// https://lwn.net/ml/netdev/20190531202132.379386-7-andriin@fb.com/ 
+
+/* 
+libbpf: map 'counter_table': attr 'type': expected PTR, got int.
+Error: failed to open object file
+*/
+
+/*
+libbpf: map 'counter_table': attr 'type': expected ARRAY, got int.
+Error: failed to open object file
+*/
