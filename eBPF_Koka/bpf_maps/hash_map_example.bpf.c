@@ -20,11 +20,12 @@ int hello(void *ctx) {
     uint64_t counter = 0;
     uint64_t *p;
 
+    /*
     int *ptr = (int *) malloc(sizeof(int));
     if(ptr) {
         *ptr = 5;
         free(ptr);
-    }
+    } */
     
 
     uid = bpf_get_current_uid_gid() & 0xFFFFFFFF;   //returns a 64 bits integer containing the current GID and UID
