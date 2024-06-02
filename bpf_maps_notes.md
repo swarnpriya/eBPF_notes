@@ -6,6 +6,10 @@
     - BPF maps : BPF maps are useful when we want to deal with information of various types. It can be also useful when various eBPF programs are enquiring about some shared information (this information can be stored in the maps). It can be also useful when the information needs to be shared between the user space and kernel space. 
     - perf events : TODO
 - When both user space and kernel space access the same maps, they both need an understanding about the key and value structures in the memory. This can work if both the user space and kernel space programs accessing the maps are written in C and they share the header. Or there must be some means to transfer the information about map structure in a consistent manner to both user space and kernel space. 
+- Usecases of maps:
+    - An eBPF program writing results or metrics into a map, which can be retrieved from the user space.
+    - An eBPF program can store some metadata information about the state of the program that can be used by other eBPF program or the same program.
+    - A user space program can write some configuration information that can be used by the eBPF program.
 
 ## Defining maps in eBPF programs
 - When we want to use maps in eBPF programs, we need to define them in our program.
@@ -95,6 +99,11 @@ struct {
     - BPF_MAP_LOOKUP_BATCH
     - BPF_MAP_UPDATE_BATCH
     - BPF_MAP_DELETE_BATCH
+
+### Some imp points:
+- Maps are declared in eBPF programs (kernel space) and uses helper functions to access the map. 
+- From the user space, maps can be accessed through bpf_calls (syscalls : bpf()). The syscall interface is only used by the user space programs.
+![interaction](interaction.png)
 
 
 ## References:
