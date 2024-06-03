@@ -1,6 +1,9 @@
 # Maps
 - Maps provide a way for eBPF programs to communicate with each other (kernel space) and also with the user space programs.
-- Maps are generic key/value store. 
+- Maps are generic key/value store. There are different kinds of maps.
+    - Array maps: The key type is always an int
+    - Hash maps: The key type can be any arbitrary type 
+    
 - We have seen in various examples that how a user space programs (written using libbpf library or bpftool)is used to load an eBPF program into the kernel, attach it to an event and finally execute it. But to see the output/gather information about it, we often rely on these mechanism:
     - bpf_pritnk : Mainly used for debugging purposes. Prints the debug message to the tracepipe. It is not possible to differentiate which message is printed through which process.
     - BPF maps : BPF maps are useful when we want to deal with information of various types. It can be also useful when various eBPF programs are enquiring about some shared information (this information can be stored in the maps). It can be also useful when the information needs to be shared between the user space and kernel space. 
