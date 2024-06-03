@@ -5,6 +5,11 @@
 
 #define ETH_P_IPV4	0x0800
 
+static int do_check(__u32 index, struct xdp_md *search_ctx) {
+    bpf_printk("The value of h_proto is %d", index);
+    return 0;
+}
+
 SEC("xdp")
 int xdp_drop_prog(struct xdp_md *ctx)
 {
@@ -13,17 +18,26 @@ int xdp_drop_prog(struct xdp_md *ctx)
     struct ethhdr *eth = data;
     __u16 h_proto;
 
+    int arr[1024] = {1,};
+    int sum = 0;
+    for (int i =0; i < 1024; i++) {
+        arr[i] = i + (int) h_proto;
+        sum += arr[i];
+    }
+
     if (data + sizeof(struct ethhdr) > data_end)
         return XDP_DROP;
 
     h_proto = eth->h_proto;
     // works for <65535 but not for h_proto as it will be a dynamic value
     // But verifier was not smart enough to compute from the type of h_proto that the max permutation canbe 65535
-    for (int i = 0; i < h_proto; i++) {
-        bpf_printk("The value of h_proto is %d", h_proto);
-    }
+    //for (int i = 0; i < h_proto; i++) {
+    //    bpf_printk("The value of h_proto is %d", h_proto);
+    //}
+    // 8 million
+    bpf_loop(100000000, do_check, &ctx, 0);
     if (h_proto == htons(ETH_P_IPV4))
-        bpf_printk("There is an ipv4 packet");
+        bpf_printk("There is an ipv4 packet and sum is %d\n", sum);
         return XDP_PASS;
 
     return XDP_DROP;
