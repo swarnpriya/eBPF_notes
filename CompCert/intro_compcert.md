@@ -14,7 +14,7 @@
 - **Observable behaviors**
     - Everthing the user of the program, or the physical world in which it executes can see about the action of the program with the exception of execution time and memory consumption.
     - Trace of all I/O behaviors and volatile operations it performs. 
-    - $\color{red}{\textsf{\large{Indication of whether it terminates and how it terminates (normally or an error)}}}$ 
+    - $\color{red}{\textsf{Indication of whether it terminates and how it terminates (normally or an error)}}$ 
       ```
       int main() {
         int i = 1;
@@ -54,9 +54,8 @@
         $\color{red}{\textsf{We need to extend it to add a boolean for license and pkt-access (true: license requires/pkt-access, false: no license/no pkt-access).}}$ 
     
         $\color{red}{\textsf{Example, bpf-map-lookup-elem:}}$
-
-        $\color{red}{\textsf{bpf-map-lookup-elem will produce the event of form:
-         Event-syscall(bpf-map-lookup-elem, (ptr to map :: ptr to key), ptr to value, license: false, pkt-access: true)}}$
+        $\color{red}{\textsf{bpf-map-lookup-elem will produce the event of form:}}$
+        $\color{red}{\textsf{Event-syscall(bpf-map-lookup-elem, (ptr to map :: ptr to key), ptr to value, license: false, pkt-access: true)}}$
     ```
      const struct bpf_func_proto bpf_map_lookup_elem_proto = 
      {.func		= bpf_map_lookup_elem,
