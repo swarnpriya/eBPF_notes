@@ -53,8 +53,7 @@
     
         $\color{red}{\textsf{Example, bpf\_map\_lookup\_elem:}}$
 
-        $\color{red}{\textsf{bpf\_map\_lookup\_elem will produce the event of form:\\
-        
+        $\color{red}{\textsf{bpf\_map\_lookup\_elem will produce the event of form:
          Event\_syscall(bpf\_map\_lookup\_elem, (ptr to map :: ptr to key), ptr to value, license: false, pkt\_access: true)}}$
     ```
      const struct bpf_func_proto bpf_map_lookup_elem_proto = 
