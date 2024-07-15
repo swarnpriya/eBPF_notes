@@ -49,7 +49,9 @@
           Output: Time 17: program terminated (exit code = 0)
     - Event_syscall : $\color{blue}{\textsf{A system call recording the name of the system call, its parameters, and its result.}}$
     
-        $\color{red}{\textsf{All helper functions are kind of external syscalls that CompCert C uses in eBPF program. The eventval can be used to capture the ebpf properties that a specific helper function has the specific type and return value. We need to extend it to add a boolean for license and pkt-access (true: license requires/pkt-access, false: no license/no pkt-access).}}$ 
+        $\color{red}{\textsf{All helper functions are kind of external syscalls that CompCert C uses in eBPF program.}}$ 
+        $\color{red}{\textsf{The eventval can be used to capture the ebpf properties that a specific helper function has the specific type and return value.}}$ 
+        $\color{red}{\textsf{We need to extend it to add a boolean for license and pkt-access (true: license requires/pkt-access, false: no license/no pkt-access).}}$ 
     
         $\color{red}{\textsf{Example, bpf-map-lookup-elem:}}$
 
@@ -64,8 +66,8 @@
 	  .arg1_type	= ARG_CONST_MAP_PTR,
 	  .arg2_type	= ARG_PTR_TO_MAP_KEY,};
     ```
-    - Event_vload : </font> $\color{blue}{\textsf{A volatile load from a global memory location, recording the chunk and address being read and the value just read.}}$
-    - Event_vstore : </font> $\color{blue}{\textsf{A volatile store to a global memory location, recording the chunk and address being written and the value stored there.}}$
+    - Event_vload : $\color{blue}{\textsf{A volatile load from a global memory location, recording the chunk and address being read and the value just read.}}$
+    - Event_vstore : $\color{blue}{\textsf{A volatile store to a global memory location, recording the chunk and address being written and the value stored there.}}$
     - Event_annot : $\color{blue}{\textsf{An annotation, recording the text of the annotation and the values
       of the arguments.}}$ $\color{red}{\textsf{Question: What kind of annotation does this captures?}}$
 
