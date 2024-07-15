@@ -49,12 +49,12 @@
           Output: Time 17: program terminated (exit code = 0)
     - Event_syscall : $\color{blue}{\textsf{A system call recording the name of the system call, its parameters, and its result.}}$
     
-        $\color{red}{\textsf{All helper functions are kind of external syscalls that CompCert C uses in eBPF program. The eventval can be used to capture the ebpf properties that a specific helper function has the specific type and return value. We need to extend it to add a boolean for license and pkt\_access (true: license requires/pkt\_access, false: no license/no pkt\_access).}}$ 
+        $\color{red}{\textsf{All helper functions are kind of external syscalls that CompCert C uses in eBPF program. The eventval can be used to capture the ebpf properties that a specific helper function has the specific type and return value. We need to extend it to add a boolean for license and pkt-access (true: license requires/pkt-access, false: no license/no pkt-access).}}$ 
     
-        $\color{red}{\textsf{Example, bpf\_map\_lookup\_elem:}}$
+        $\color{red}{\textsf{Example, bpf-map-lookup-elem:}}$
 
-        $\color{red}{\textsf{bpf\_map\_lookup\_elem will produce the event of form:
-         Event\_syscall(bpf\_map\_lookup\_elem, (ptr to map :: ptr to key), ptr to value, license: false, pkt\_access: true)}}$
+        $\color{red}{\textsf{bpf-map-lookup-elem will produce the event of form:
+         Event-syscall(bpf-map-lookup-elem, (ptr to map :: ptr to key), ptr to value, license: false, pkt-access: true)}}$
     ```
      const struct bpf_func_proto bpf_map_lookup_elem_proto = 
      {.func		= bpf_map_lookup_elem,
