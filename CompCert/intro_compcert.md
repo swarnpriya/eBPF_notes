@@ -98,3 +98,17 @@
     | Econsinf: event -> traceinf -> traceinf.
 
     ```
+- **Function signature**
+  - Return type of eBPF program should be ``int``
+    - In CompCert, a function has a signature
+      ```
+        Record function : Type := mkfunction {
+          fn_return: type;
+          fn_callconv: calling_convention;
+          fn_params: list (ident * type);
+          fn_vars: list (ident * type);
+          fn_temps: list (ident * type);
+          fn_body: statement
+        }.
+      ```
+    - $\color{red}{\textsf{We can harcode that fn-return is always int. And add type preservation lemma in each compiler pass.}}$
