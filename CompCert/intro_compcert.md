@@ -34,7 +34,8 @@
           $\color{red}{\textsf{ERROR: Undefined behavior}}$
 
           The error is from the interpreter because it doesnot understand the "bpf_printk" at this moment. 
-          $\color{red}{\textsf{CompCert doesnot catch termination at source level, but it preserves it. We have Koka type system ensuring termination, which is a great benefit here.}}
+
+          $\color{red}{\textsf{CompCert doesnot catch termination at source level, but it preserves it. We have Koka type system ensuring termination, which is a great benefit here.}}$
 
           $\color{red}{\textsf{We need to use some static analysis tool to check termination at C level}}$
       ```
@@ -61,6 +62,8 @@
         $\color{red}{\textsf{Example, bpf-map-lookup-elem:}}$
         $\color{red}{\textsf{bpf-map-lookup-elem will produce the event of form:}}$
         $\color{red}{\textsf{Event-syscall(bpf-map-lookup-elem, (ptr to map :: ptr to key), ptr to value, license: false, pkt-access: true)}}$
+
+        $\color{red}{\textsf{We can also use Event-annot to capture some specific helper function properties}}$
     ```
      const struct bpf_func_proto bpf_map_lookup_elem_proto = 
      {.func		= bpf_map_lookup_elem,
