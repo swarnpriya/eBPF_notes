@@ -32,6 +32,11 @@
           Output: Stuck state: calling bpf_trace_printk(<ptr>, 17)
 
           $\color{red}{\textsf{ERROR: Undefined behavior}}$
+
+          The error is from the interpreter because it doesnot understand the "bpf_printk" at this moment. 
+          $\color{red}{\textsf{CompCert doesnot catch termination at source level, but it preserves it. We have Koka type system ensuring termination, which is a great benefit here.}}
+
+          $\color{red}{\textsf{We need to use some static analysis tool to check termination at C level}}$
       ```
       int main() {
         int i = 1;
