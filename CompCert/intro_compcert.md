@@ -1,6 +1,7 @@
 # Introduction to CompCert
 
 - A formally verified compiler with machine-assisted mathematical proofs for its correctness and hence ensure no miscompilation issues. 
+![compcert_overview](compcert_image)
 - **Semantic preservation theorem**
   - For all source program S and compiler-generated code C, 
     if the compiler, applied to the source S, produces the code C,
