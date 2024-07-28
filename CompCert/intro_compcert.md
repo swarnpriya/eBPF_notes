@@ -104,7 +104,7 @@
   - CompCert C provides a general mechanism to attach free-form annotations (text messges possible mentioning values of the variables) to C program points.
   - Annotations are preserved by the compiler to the assembly.
   - __builtin_annot statements offer a general and flexible
-    mechanism to mark program points and local variables in C source files, then track them all the way to assembly language. 
+    mechanism to mark program points and local variables in C source files, then track them all the way to assembly language. For CompCert, calling these annotation functions are like calling an external variadic function like printf. In contrast to printf most format specifiers are tagged with numbers and refer to a specific argument independent of the order. It is also possible to refer to an argument more than once.
   - **Motivation for adding these annotations to CompCert:**
     - Several anaylsis tool works directly at the executable mahcine code rather than at the C source level. 
     - To analyze code at the lower level, often the tool needs some extra information from the programmer that can not be reconstructed at the lower level.
@@ -186,10 +186,58 @@
         - Example: 
           int x = tbl[__builtin_annot_intval("entered with %1=(0,99)", (lo + hi)/ 2)];
 
-- Information:
-  - $\color{red}{\textsf{error: 
-    In function bsearch: Builtin annot is not 
-    supported by eBPF 1 error detected.}}$
+  - Information:
+    - $\color{red}{\textsf{error: 
+      In function bsearch: Builtin annot is not 
+      supported by eBPF 1 error detected.}}$
+  - Examples: 
+    ```
+      static void func(int count)
+      {
+        int i;
+        for (int i = 0; i < count; i++) {
+          __builtin_ais_annot("try loop %here bound: %e1;", count);
+          ...
+        }
+        ...
+      }
+    - If constant propagation can prove that count is 
+      always zero, CompCert can remove the whole loop since 
+      it will never be executed. In such a situation the 
+      annotation will also be removed. In contrast to this, 
+      a conventional source code annotation via special 
+      formatted C comments (e.g. // ai: …) would remain visible 
+      and probably cause problems since a3 collects such 
+      annotations by scanning the source code.
+    ```
+
+    ```
+    - Specifying a time bound for a busy waiting loop
+    void openCanSocket(volatile struct device_t* device)
+    {
+      ...
+      // Busy wait for ACK. Assume a worst-case timing of 23 us
+      while(device->bus_data != 0x00) {
+        __builtin_ais_annot("try loop %here takes: 23 us;");
+      }
+      ...
+    }
+    ```
+    ```
+    - Providing unrolling hints for loops for improved 
+      precision in a3:
+
+    void strcpy_x(char s[], char t[])
+    {
+      int i = 0;
+      while (( s[i] = t[i] ) != '\0') {
+        __builtin_ais_annot("try loop %here 
+        mapping { default unroll: 50; }");
+        ...
+      }
+    }
+    ```
+
 
 - **Function signature**
   - Return type of eBPF program should be ``int``
