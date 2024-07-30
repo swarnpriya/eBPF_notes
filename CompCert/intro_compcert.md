@@ -253,3 +253,5 @@
         }.
       ```
     - $\color{red}{\textsf{We can harcode that fn-return is always int.}}$ $\color{red}{\textsf{And add type preservation lemma in each compiler pass.}}$
+    - $\color{red}{\textsf{In CompCert, if the return type of main is anything other than int then it generates a warning}}$
+    - $\color{red}{\textsf{warning: return type of 'main' should be 'int' [-Wmain-return-type]}}$
