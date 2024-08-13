@@ -27,5 +27,7 @@
     - Function-body correctness proofs, one per file.
 
 ## VST notion for reasoning about memory 
-- To match with CompCert semantics and 
+- To match with CompCert semantics and its memory model, VST takes into consideration about various permissions used along with memory accesses in CompCert.
+    - Lattice: $\bot$ < unreadable < readable < writable < $\top$
 - It uses seperation logic (IRIS as the current support) to reason about memory.
+
