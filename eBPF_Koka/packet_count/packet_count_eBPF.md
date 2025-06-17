@@ -157,5 +157,8 @@ char LICENSE[] SEC("license") = "Dual BSD/GPL";
 
 # Notes:
 - **<span style="color:green">$ bpftool net detach xdp dev wlp2s0</span>**
+- There’s no inverse of bpftool prog load, but we can remove the program from the kernel by deleting the pinned pseudofile:
+  **<span style="color:green">$ rm /sys/fs/bpf/packet_count</span>**
+  **<span style="color:green">$ bpftool prog show name packet_count</span>**
 - Packet processing is a very common application of eBPF.
 
