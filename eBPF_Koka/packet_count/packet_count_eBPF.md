@@ -156,4 +156,6 @@ char LICENSE[] SEC("license") = "Dual BSD/GPL";
 
 
 # Notes:
-- Packet processing is a very common application of eBPF. 
+- **<span style="color:green">$ bpftool net detach xdp dev wlp2s0</span>**
+- Packet processing is a very common application of eBPF.
+
